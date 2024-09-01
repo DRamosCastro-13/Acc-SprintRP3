@@ -1,10 +1,12 @@
 package com.example.taskservice.controllers;
 
+import com.example.taskservice.dtos.NewTaskDTO;
 import com.example.taskservice.models.TaskEntity;
 import com.example.taskservice.services.TaskService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -29,13 +31,16 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<TaskEntity> createTask(@RequestBody TaskEntity task){ //validar body
-        return taskService.createTask(task);
+    public Mono<TaskEntity> createTask(@RequestBody NewTaskDTO task){ //validar body
+        TaskEntity newTask = new TaskEntity(task.title(), task.description(), task.status(), task.email());
+        return taskService.createTask(newTask);
     }
 
     @PutMapping("/{id}")
-    public Mono<TaskEntity> updateTask(@PathVariable Long id, @RequestBody TaskEntity task){
-        return taskService.updateTask(id, task);
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<TaskEntity> updateTask(@PathVariable Long id, @RequestBody NewTaskDTO task){
+        TaskEntity updateTask = new TaskEntity(task.title(), task.description(), task.status(), task.email());
+        return taskService.updateTask(id, updateTask);
     }
 
     @DeleteMapping("/{id}")
