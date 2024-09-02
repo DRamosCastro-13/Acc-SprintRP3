@@ -56,4 +56,9 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findById(id).switchIfEmpty(Mono.error( new TaskNotFoundException("Task not found for ID: " + id) ))
                 .flatMap(taskRepository::delete);
     }
+
+    @Override
+    public Mono<TaskEntity> saveTask(TaskEntity task) {
+        return taskRepository.save(task);
+    }
 }

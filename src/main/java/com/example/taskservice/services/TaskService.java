@@ -13,4 +13,5 @@ public interface TaskService {
     Mono<TaskEntity> createTask(TaskEntity task);
     Mono<TaskEntity> updateTask(Long id, TaskEntity task);
     Mono<Void> deleteTask(Long id);
+    Mono<TaskEntity> saveTask(TaskEntity task);
 }
