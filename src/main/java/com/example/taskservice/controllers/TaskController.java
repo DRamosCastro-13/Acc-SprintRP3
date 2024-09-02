@@ -1,6 +1,7 @@
 package com.example.taskservice.controllers;
 
 import com.example.taskservice.dtos.NewTaskDTO;
+import com.example.taskservice.dtos.TaskDTO;
 import com.example.taskservice.models.TaskEntity;
 import com.example.taskservice.services.TaskService;
 import io.swagger.v3.oas.annotations.tags.Tag;
