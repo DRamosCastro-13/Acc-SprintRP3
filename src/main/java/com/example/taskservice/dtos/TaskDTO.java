@@ -1,5 +1,7 @@
 package com.example.taskservice.dtos;
 
+import com.example.taskservice.models.TaskEntity;
+
 public class TaskDTO {
 
    private Long id;
@@ -14,12 +16,12 @@ public class TaskDTO {
 
     public TaskDTO(){}
 
-    public TaskDTO(Long id, String title, String description, String status, String email) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.email = email;
+    public TaskDTO(TaskEntity taskEntity) {
+        id = taskEntity.getId();
+        title = taskEntity.getTitle();
+        description = taskEntity.getDescription();
+        status = taskEntity.getStatus();
+        email = taskEntity.getEmail();
     }
 
     public Long getId() {

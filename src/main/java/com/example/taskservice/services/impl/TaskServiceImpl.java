@@ -1,5 +1,6 @@
 package com.example.taskservice.services.impl;
 
+import com.example.taskservice.dtos.TaskDTO;
 import com.example.taskservice.handlers.TaskNotFoundException;
 import com.example.taskservice.models.TaskEntity;
 import com.example.taskservice.repositories.TaskRepository;
@@ -20,8 +21,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Mono<TaskDTO> getTaskDTOById(Long id) {
+        return getTaskById(id).flatMap(taskEntity -> Mono.just(new TaskDTO(taskEntity)));
+    }
+
+    @Override
     public Flux<TaskEntity> getAllTasks() {
         return taskRepository.findAll().switchIfEmpty(Mono.error(new TaskNotFoundException("No existing tasks")));
+    }
+
+    @Override
+    public Flux<TaskDTO> getAllTasksDTO() {
+        return getAllTasks().flatMap(taskEntity -> Flux.just(new TaskDTO(taskEntity)));
     }
 
     @Override

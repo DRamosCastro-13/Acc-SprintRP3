@@ -21,13 +21,13 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping("/{id}")
-    public Mono<TaskEntity> getTaskById(@PathVariable Long id){
-        return taskService.getTaskById(id);
+    public Mono<TaskDTO> getTaskById(@PathVariable Long id){
+        return taskService.getTaskDTOById(id);
     }
 
     @GetMapping
-    public Flux<TaskEntity> getAllTasks(){
-        return taskService.getAllTasks();
+    public Flux<TaskDTO> getAllTasks(){
+        return taskService.getAllTasksDTO();
     }
 
     @PostMapping
